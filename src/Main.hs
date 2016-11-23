@@ -37,12 +37,12 @@ checkFV vars (Ap fun arg) = (checkFV vars fun) && (checkFV vars arg)
 -- Requirement: exp doesn't have any free variable.
 subst :: String -> Exp -> Exp -> Exp
 subst varName exp (Var x) =
-    if compare varName x == EQ
+    if varName == x
     then exp
     else (Var x)
 
 subst varName exp (Lam argName body) =
-    if compare varName argName == EQ
+    if varName == argName
     then (Lam argName body)
     else (Lam argName (subst varName exp body))
 
